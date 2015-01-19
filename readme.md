@@ -2,7 +2,7 @@
 
 Just copy the .scrutinizer.yml into your project.  Note, this is set to wait for a code coverage report to be sent.  If you are not running tests, or you have tests running without coverage, remove line 2 from that file. 
 
-# Travis CI
+# Travis CI / Testing
 
 ## General
 
