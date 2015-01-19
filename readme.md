@@ -12,7 +12,7 @@ Just copy the .scrutinizer.yml into your project.  Note, this is set to wait for
 
 > composer require behat/behat behat/mink behat/mink-extension laracasts/behat-laravel-extension --dev
 
-- If you are using behat by itself, just copy the travis-behat config to your project as .travis.yml.
+- If you are using behat by itself, just copy the behat config and travis-behat config to your project as .travis.yml.
 - If you are using it along side other tests, grab the other travis config, copy it over and add the last 2 lines from before_script and the single script line from .travis-behat.yml into it.
     - An example is included for phpspec/behat in .travis-phpspec-behat.yml.
     
