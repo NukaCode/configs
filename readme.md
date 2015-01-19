@@ -2,7 +2,9 @@
 
 Just copy the .scrutinizer.yml into your project.  Note, this is set to wait for a code coverage report to be sent.  If you are not running tests, or you have tests running without coverage, remove line 2 from that file. 
 
-# Travis CI
+I have disabled php_sim in this config.  I have yet to be able to get the duplicated code check to be reasonable.  If anyone has a good set of configs for this test, I would love to reenable it.
+
+# Travis CI / Testing
 
 ## General
 
