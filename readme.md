@@ -40,6 +40,7 @@ I have disabled php_sim in this config.  I have yet to be able to get the duplic
 - To enable code coverage, grab the c3.php file from https://github.com/Codeception/c3
     - Add the following to the very top of your public/index.php file.
 
+```php
     /*
     |--------------------------------------------------------------------------
     | Codeception 
@@ -47,3 +48,4 @@ I have disabled php_sim in this config.  I have yet to be able to get the duplic
     */
     
     include(__DIR__ . '/../c3.php');
+```
