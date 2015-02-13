@@ -17,6 +17,6 @@ before_script:
 
 script:
   - ./vendor/bin/behat
-  - ./vendor/bin/phpspec run
+  - ./vendor/bin/phpspec run -n
   - wget https://scrutinizer-ci.com/ocular.phar
   - php ocular.phar code-coverage:upload  --format=php-clover coverage.xml
