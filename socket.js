@@ -1,0 +1,32 @@
+var app = require('http').createServer(handler);
+var io = require('socket.io')(app);
+
+var Redis = require('ioredis');
+var redis = new Redis();
+
+app.listen(3000, function() {
+    console.log('Server is running!');
+});
+
+function handler(req, res) {
+    res.writeHead(200);
+    res.end('Ayup.');
+}
+
+io.on('connection', function(socket) {
+    //
+});
+
+redis.psubscribe('*', function(err, count) {
+    console.error(err);
+});
+
+redis.on('pmessage', function(subscribed, channel, message) {
+    message = JSON.parse(message);
+
+    console.log(subscribed);
+    console.log(channel);
+    console.log(message);
+
+    io.emit(channel + ':' + message.event, message.data);
+});
