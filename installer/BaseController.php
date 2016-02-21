@@ -1,52 +1,59 @@
-<?php namespace App\Http\Controllers;
+<?php
 
-use Illuminate\Foundation\Bus\DispatchesCommands;
+namespace App\Http\Controllers;
+
+use Carbon\Carbon;
+use Illuminate\Foundation\Auth\Access\AuthorizesRequests;
+use Illuminate\Foundation\Bus\DispatchesJobs;
 use Illuminate\Foundation\Validation\ValidatesRequests;
 use NukaCode\Core\Controllers\BaseController as CoreBaseController;
+use NukaCode\Menu\DropDown;
+use NukaCode\Menu\Link;
 
-abstract class BaseController extends CoreBaseController {
-
-    use DispatchesCommands, ValidatesRequests;
+abstract class BaseController extends CoreBaseController
+{
+    use DispatchesJobs, ValidatesRequests, AuthorizesRequests;
 
     public function __construct()
     {
         parent::__construct();
 
-        $this->setUpMenu();
+        $this->setLeftMenu();
+        $this->setRightMenu();
     }
 
-    protected function setUpMenu()
+    protected function setPageTitle($pageTitle)
     {
-        \Menu::add('leftMenu')
-             ->quickLink('Home', 'home')
-             ->quickLink('Memberlist', 'memberlist')
-             ->end();
+        $this->setViewData(compact('pageTitle'));
+    }
 
-        if (\Auth::guest()) {
-            \Menu::add('rightMenu')
-                 ->quickLink('Login', 'login')
-                 ->quickLink('Register', 'register')
-                 ->end();
-        } else {
-            \Auth::user()->updateLastActive();
-            \Menu::add('rightMenu')
-                 ->addDropDown('Admin')
-                 ->quickLink('Dashboard', 'admin.index')
-                 ->setFilter(function (){
-                     return \Auth::user()->is('ADMIN');
-                 })
-                 ->end()
-                 ->addDropDown(\Auth::user()->username)
-                 ->addLink('Edit your profile')
-                 ->setUrl('user/profile/')
-                 ->end()
-                 ->addLink('Public Profile')
-                 ->setUrl('user/view/'. \Auth::user()->id)
-                 ->end()
-                 ->quickLink('Logout', 'logout')
-                 ->end()
-                 ->end();
+    private function setLeftMenu()
+    {
+        $leftMenu = \Menu::getMenu('leftMenu');
+
+        $leftMenu->link('home', function (Link $link) {
+            $link->name = 'Home';
+            $link->url  = route('home');
+        });
+    }
+
+    private function setRightMenu()
+    {
+        $rightMenu = \Menu::getMenu('rightMenu');
+
+        // If they are a guest, offer them to log in.
+        if (auth()->guest()) {
+            $rightMenu->link('login', function (Link $link) {
+                $link->name = 'Login';
+                $link->url  = route('auth.login');
+            });
+
+            if (config('nukacode-user.enable_social') == false) {
+                $rightMenu->link('register', function (Link $link) {
+                    $link->name = 'Register';
+                    $link->url  = route('auth.register');
+                });
+            }
         }
     }
-
 }
