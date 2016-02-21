@@ -20,7 +20,7 @@ At this point, look in `config/nukacode-user.php` and set everything up how you 
 
 ```
     php artisan migrate
-    php artisan db:seed --class=UsersTableSeeder
+    php artisan db:seed --class=UserSeeder
     php artisan db:seed --class=AclSeeder
 ```
 
