@@ -34,3 +34,7 @@ To use social authentication, you will need to perform a few extra steps.
 * Set `enable_social` to true in `config/nukacode-user.php`.
 * Set the driver in `config/nukacode-user.php` in the `social` array.
    * Add any scopes or extras you need here as well.
+
+# Events
+
+The users package comes with 2 built in events.  `UserLoggedIn` and `UserRegistered`.  These will already be in your `EventServiceProvider`.  Each event contains a single property for the `user` that triggered the event.  If you want to do anything with them, simply add your listeners.
