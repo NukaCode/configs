@@ -24,7 +24,7 @@ At this point, look in `config/nukacode-user.php` and set everything up how you 
     php artisan db:seed --class=AclSeeder
 ```
 
-# Social AUthentication
+# Social Authentication
 
 To use social authentication, you will need to perform a few extra steps.
 
