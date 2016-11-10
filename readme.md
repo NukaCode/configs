@@ -1,3 +1,6 @@
+# Schema
+The `inspect.php` file is the file needed to take a project's database and convert it to something usable by schema.
+
 # Scrutinizer
 
 Just copy the .scrutinizer.yml into your project.  Note, this is set to wait for a code coverage report to be sent.  If you are not running tests, or you have tests running without coverage, remove line 2 from that file. 
